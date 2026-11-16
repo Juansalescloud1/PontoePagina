@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponto & Página - Meu Perfil</title>
+    
+    <!-- Importando as fontes do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Conectando o arquivo de estilos (CSS) -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Script do JivoChat (Chat de atendimento ao cliente) que carrega de forma assíncrona -->
+    <script src="//code.jivosite.com/widget/dVqa3bUvC3" async></script>
+</head>
+<!-- O atributo data-page ajuda o script.js a saber que estamos na página de perfil para rodar funções específicas -->
+<body data-page="perfil">
+
+    <!-- Cabeçalho e Menu de Navegação -->
+    <header>
+        <div class="container nav">
+            <a class="logo" href="index.html">
+                <img src="img/logo.png" alt="Ponto & Página">
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="livros.html">Livros</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                    <li><a href="pedidos.html">Meus Pedidos</a></li>
+                </ul>
+            </nav>
+
+            <!-- Área do usuário no lado direito do cabeçalho -->
+            <div class="actions">
+                <div id="userProfile" style="display: flex; align-items: center; gap: 10px;">
+                    <!-- Avatar e Nome do usuário logado -->
+                    <img id="userAvatarHeader" src="img/avatar-default.svg" alt="Foto" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover;">
+                    <span id="userName" style="font-size: 0.85rem; font-weight: 600; color: var(--gold);"></span>
+                    
+                    <!-- Botão para deslogar da conta -->
+                    <button onclick="fazerLogout()" class="btn small outline" style="border-color: #ff7b6b; color: #ff7b6b; background: transparent;">Sair</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Área Principal da Página de Perfil -->
+    <div class="container" style="padding: 40px 0; max-width: 900px;">
+        <h1 style="margin-bottom: 25px;">👤 Meu Perfil</h1>
+
+        <!-- Seção de Dados do Perfil -->
+        <div id="seccaoPerfil">
+            
+            <form id="formPerfil" style="display: flex; flex-direction: column; gap: 20px;">
+                
+                <!-- Área da Foto de Perfil -->
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <img id="previewFoto" src="img/avatar-default.svg" style="width: 90px; height: 90px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold);">
+                    <div>
+                        <label for="inputFoto" class="btn small outline" style="cursor: pointer;">Alterar Foto</label>
+                        <input type="file" id="inputFoto" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <!-- Informações Pessoais -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <label>Nome Completo</label>
+                        <input type="text" id="perfilNome" required style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                    <div>
+                        <label>Telefone / WhatsApp</label>
+                        <input type="tel" id="perfilTelefone" placeholder="(11) 99999-9999" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                </div>
+
+                <!-- Endereço de Entrega -->
+                <h3 style="margin-top: 15px; color: var(--gold);">Endereço de Entrega</h3>
+                
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+                    <div>
+                        <label>Rua / Avenida</label>
+                        <input type="text" id="endRua" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                    <div>
+                        <label>Número</label>
+                        <input type="text" id="endNumero" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                    <div>
+                        <label>Bairro</label>
+                        <input type="text" id="endBairro" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                    <div>
+                        <label>Cidade</label>
+                        <input type="text" id="endCidade" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                    <div>
+                        <label>CEP</label>
+                        <input type="text" id="endCep" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                </div>
+
+                <!-- Alteração de Senha -->
+                <h3 style="margin-top: 15px; color: var(--gold);">Alterar Senha</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <label>Senha Atual</label>
+                        <input type="password" id="senhaAtual" placeholder="Preencha apenas se quiser trocar" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                    <div>
+                        <label>Nova Senha</label>
+                        <input type="password" id="novaSenha" placeholder="Nova senha" style="width: 100%; padding: 10px; margin-top: 5px;">
+                    </div>
+                </div>
+
+                <!-- Botões de Ação (Salvar e Cancelar) -->
+                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                    <button type="button" onclick="window.location.href='index.html'" class="btn" style="flex: 1; background: transparent; border: 1px solid #ccc; color: #333;">Cancelar</button>
+                    <button type="submit" class="btn" style="flex: 1;">Salvar Alterações</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notificação rápida (Toast) para mensagens do sistema -->
+    <div class="toast" role="status"></div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2026 Ponto & Página - Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Importa o arquivo JS principal do projeto -->
+    <script src="script.js"></script>
+
+    <!-- SCRIPT APENAS PARA A FOTO DE PERFIL (Para mostrar a foto na tela) -->
+    <script>
+        document.getElementById('inputFoto').addEventListener('change', function(event) {
+            const arquivo = event.target.files[0];
+            
+            if (arquivo) {
+                const leitor = new FileReader();
+                
+                leitor.onload = function(e) {
+                    const novaFoto = e.target.result;
+                    
+                    // Atualiza a imagem na tela
+                    document.getElementById('previewFoto').src = novaFoto;
+                    
+                    const avatarHeader = document.getElementById('userAvatarHeader');
+                    if (avatarHeader) {
+                        avatarHeader.src = novaFoto;
+                    }
+                    
+                    // Salva a foto temporariamente na sessão
+                    let usuarioSalvo = sessionStorage.getItem('usuarioLogado');
+                    if (usuarioSalvo) {
+                        let usuario = JSON.parse(usuarioSalvo);
+                        usuario.foto = novaFoto;
+                        sessionStorage.setItem('usuarioLogado', JSON.stringify(usuario));
+                    }
+                };
+                
+                leitor.readAsDataURL(arquivo);
+            }
+        });
+        
+        // Carrega a foto quando a página abre
+        window.addEventListener('load', function() {
+            let usuarioSalvo = sessionStorage.getItem('usuarioLogado');
+            if (usuarioSalvo) {
+                let usuario = JSON.parse(usuarioSalvo);
+                if (usuario.foto) {
+                    document.getElementById('previewFoto').src = usuario.foto;
+                    const avatarHeader = document.getElementById('userAvatarHeader');
+                    if (avatarHeader) avatarHeader.src = usuario.foto;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

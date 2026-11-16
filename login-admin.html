@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrador | Ponto & Página</title>
+    
+    <!-- Importando as fontes do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Conectando o arquivo de estilos (CSS) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth">
+
+    <!-- Caixa centralizada na tela -->
+    <div class="box">
+        <!-- Logo que funciona como link para voltar à página inicial -->
+        <a href="index.html">
+            <img src="img/logo.png" alt="Logo" style="height: 30px; margin-bottom: 20px;">
+        </a>
+        
+        <h1>Área Restrita</h1>
+        <p class="muted">Entre com as credenciais de administrador.</p>
+
+        <!-- Formulário de Login do Administrador -->
+        <form id="formLoginAdmin">
+            <label for="adminUser">Usuário</label>
+            <input type="text" id="adminUser" required placeholder="admin">
+
+            <label for="adminPass">Senha</label>
+            <input type="password" id="adminPass" required placeholder="******">
+
+            <!-- Div vazia que vai mostrar a mensagem de erro caso ele erre a senha -->
+            <div class="err" id="erroAdmin" style="color: red; margin-top: 5px; font-size: 0.9rem;"></div>
+
+            <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Entrar no Painel</button>
+        </form>
+        
+        <!-- Link de fuga caso o cliente tenha clicado aqui por engano -->
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="index.html" style="color: var(--gold); font-size: 0.85rem;">← Voltar para a loja</a>
+        </div>
+    </div>
+
+    <!-- Script simples para validar o login do admin -->
+    <script>
+        document.getElementById('formLoginAdmin').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var usuario = document.getElementById('adminUser').value;
+            var senha = document.getElementById('adminPass').value;
+
+            if (usuario === 'admin' && senha === '123456') {
+                document.getElementById('erroAdmin').textContent = '';
+                
+                // CORRIGIDO: Usa sessionStorage para bater com o script.js do painel.html
+                sessionStorage.setItem('adminLogado', 'true');
+                
+                window.location.href = 'painel.html';
+            } else {
+                document.getElementById('erroAdmin').textContent = 'Usuário ou senha incorretos!';
+            }
+        });
+    </script>
+</body>
+</html>

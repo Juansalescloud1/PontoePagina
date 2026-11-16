@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponto & Página - Início</title>
+    <!-- Fontes do Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Meu CSS -->
+    <link rel="stylesheet" href="style.css">
+  <script src="//code.jivosite.com/widget/dVqa3bUvC3" async></script>
+</head>
+<body data-page="home">
+
+    <!-- Topo do site com o menu -->
+    <header>
+        <div class="container nav">
+            <!-- Logo -->
+            <a class="logo" href="index.html">
+                <img src="img/logo.png" alt="Ponto & Página">
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="livros.html">Livros</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                    <li><a href="#sobre">Sobre Nós</a></li>
+                </ul>
+            </nav>
+
+            <div class="actions">
+                <!-- Botões para entrar ou cadastrar se o utilizador não estiver logado -->
+                <div id="authButtons" style="display: flex; align-items: center; gap: 10px;">
+                    <a href="login.html" class="btn small" style="background: transparent; color: var(--gold); border: 1.5px solid var(--gold);">Entrar</a>
+                    <a class="btn small" href="cadastro.html">Cadastre-se</a>
+                </div>
+
+                <!-- Aparece só quando o utilizador faz login -->
+                <!-- Aparece só quando o utilizador faz login -->
+                    <div id="userProfile" style="display: none; align-items: center; gap: 10px;">
+                        
+                        <!-- Link clicável que envolve a foto e o nome levando para o perfil.html -->
+                        <a href="perfil.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;" title="Ir para o Meu Perfil">
+                            <img id="userAvatarHeader" src="img/avatar-default.svg" alt="Foto" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); cursor: pointer;">
+                            <span id="userName" style="font-size: 0.85rem; font-weight: 600; cursor: pointer;"></span>
+                        </a>
+                        
+                        <a href="pedidos.html" class="btn small outline" style="border-color: var(--gold); color: var(--gold); background: transparent;">📦 Meus Pedidos</a>
+                        <button onclick="fazerLogout()" class="btn small outline" style="border-color: #ff7b6b; color: #ff7b6b; background: transparent;">Sair</button>
+                    </div>
+                <!-- Botão de acesso rápido ao Painel do Administrador -->
+                <a href="painel.html" class="btn small outline" style="border-color: var(--gold); color: var(--gold); background: transparent;" title="Gerenciar Produtos">Painel Admin</a>
+
+                <!-- Ícone do carrinho -->
+                <span onclick="abrirCarrinho()" style="cursor: pointer; user-select: none; font-size: 0.88rem; font-weight: 500;">
+                    🛒 Carrinho (<b id="cart">0</b>)
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner principal -->
+    <div class="hero" style="--img:url(img/hero.jpg)">
+        <div class="container">
+            <span class="tag">BOAS HISTÓRIAS, SEMPRE COM VOCÊ</span>
+            <h1>Mais que livros,<br><em>são novos mundos.</em></h1>
+            <p>Descubra histórias que inspiram, emocionam e transformam. Sua próxima grande leitura está aqui.</p>
+            
+            <a class="btn" href="livros.html">Explorar Livros</a>
+            <a class="btn outline" href="papelaria.html">Explorar Papelaria</a>
+        </div>
+    </div>
+
+    <!-- Os benefícios / vantagens -->
+    <div class="perks">
+        <div>
+            <b>Confiança</b>
+            <small>Entregamos qualidade e confiança</small>
+        </div>
+        <div>
+            <b>Pagamento seguro</b>
+            <small>Pix, Cartões e Boleto</small>
+        </div>
+        <div>
+            <b>Entrega rápida</b>
+            <small>Para todo o Brasil</small>
+        </div>
+        <div>
+            <b>Atendimento</b>
+            <small>De segunda a sábado</small>
+        </div>
+    </div>
+
+    <!-- Destaque: Livros Mais Vendidos (Top 5) -->
+    <section id="livros-destaque">
+        <div class="container">
+            <div class="head">
+                <div>
+                    <h2>📚 Livros Mais Vendidos</h2>
+                    <p>Os títulos preferidos dos nossos leitores</p>
+                </div>
+                <a href="livros.html" class="btn outline small">Ver todos os livros →</a>
+            </div>
+            <!-- O JS injeta o Top 5 de livros aqui -->
+            <div class="grid" id="listaMaisVendidos"></div>
+        </div>
+    </section>
+
+    <!-- Destaque: Papelaria Mais Vendida (Top 5) -->
+    <section id="papelaria-destaque" style="background: rgba(255, 255, 255, 0.03); padding: 50px 0;">
+        <div class="container">
+            <div class="head">
+                <div>
+                    <h2>✏️ Papelaria Mais Vendida</h2>
+                    <p>Cadernos, canetas e acessórios em destaque</p>
+                </div>
+                <a href="papelaria.html" class="btn outline small">Ver toda papelaria →</a>
+            </div>
+            <!-- O JS injeta o Top 5 de papelaria aqui -->
+            <div class="grid" id="listaPapelariaDestaque"></div>
+        </div>
+    </section>
+
+    <!-- Sobre a Loja / Informações -->
+    <section id="sobre" style="padding: 60px 0;">
+        <div class="container">
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <span class="tag">NOSSA HISTÓRIA</span>
+                <h2 style="font-size: 2.2rem; margin: 15px 0;">Sobre a Ponto & Página</h2>
+                <p style="font-size: 1.1rem; line-height: 1.7; color: #ccc;">
+                    A <strong>Ponto & Página</strong> nasceu da paixão pela leitura e pela escrita. Nossa missão é conectar pessoas a histórias incríveis e oferecer itens de papelaria de alta qualidade para inspirar o seu dia a dia, estudo ou trabalho. Seja bem-vindo à nossa comunidade leitora!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aviso flutuante (Toast) -->
+    <div class="toast" role="status"></div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2026 Ponto & Página - Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Modal para dar zoom na imagem do livro -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">×</span>
+        <img class="modal-content" id="imgExpanded" alt="Capa Ampliada">
+    </div>
+
+    <!-- Carrinho lateral -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Seu Carrinho</h2>
+                <span class="close-cart" onclick="fecharCarrinho()">×</span>
+            </div>
+            <div id="cartItems" class="cart-items">
+                <!-- Itens do carrinho entram aqui via JS -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <strong id="cartTotalValue">R$ 0,00</strong>
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 15px;" onclick="finalizarCompra()">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script principal -->
+    <script src="script.js"></script>
+
+    <!-- Script para ler o localStorage e alterar o cabeçalho -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var usuarioSalvo = localStorage.getItem('usuarioLogado');
+
+            if (usuarioSalvo) {
+                var usuario = JSON.parse(usuarioSalvo);
+                
+                // Esconde os botões de visitante
+                document.getElementById('authButtons').style.display = 'none';
+                
+                // Mostra o perfil do utilizador
+                document.getElementById('userProfile').style.display = 'flex';
+                
+                // Exibe o primeiro nome do utilizador
+                var primeiroNome = usuario.nome.split(' ')[0];
+                document.getElementById('userName').innerText = 'Olá, ' + primeiroNome;
+            }
+        });
+
+        // Função para sair da conta, caso não esteja definida no seu script.js
+        function fazerLogout() {
+            localStorage.removeItem('usuarioLogado');
+            window.location.reload();
+        }
+    </script>
+</body>
+</html>

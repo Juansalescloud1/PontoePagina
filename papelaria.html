@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papelaria | Ponto & Página</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-page="papelaria">
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container nav">
+            <!-- Logo em Imagem -->
+            <a class="logo" href="index.html">
+                <img src="img/logo.png" alt="Ponto & Página">
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="index.html#livros">Livros</a></li>
+                    <li><a href="papelaria.html" class="active">Papelaria</a></li>
+                </ul>
+            </nav>
+
+            <div class="actions">
+                <!-- Se NÃO estiver logado, aparecem estes botões: -->
+                <div id="authButtons" style="display: flex; align-items: center; gap: 10px;">
+                    <a href="login.html" class="btn small" style="background: transparent; color: var(--gold); border: 1.5px solid var(--gold);">Entrar</a>
+                    <a class="btn small" href="cadastro.html">Cadastre-se</a>
+                </div>
+
+                <!-- Se ESTIVER logado, aparecem estes (controlados via JavaScript): -->
+              <!-- Aparece só quando o utilizador faz login -->
+                <div id="userProfile" style="display: none; align-items: center; gap: 10px;">
+                    <img id="userAvatarHeader" src="img/avatar-default.svg" alt="Foto" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                    <span id="userName" style="font-size: 0.85rem; font-weight: 600;"></span>
+                    <a href="pedidos.html" class="btn small outline" style="border-color: var(--gold); color: var(--gold); background: transparent;">📦 Meus Pedidos</a>
+                    <button onclick="fazerLogout()" class="btn small outline" style="border-color: #ff7b6b; color: #ff7b6b; background: transparent;">Sair</button>
+                </div>
+                <!-- Campo de Busca -->
+                <input class="search" oninput="atualizarLista()" placeholder="Buscar..." aria-label="Buscar">
+                
+                <!-- Botão para ir ao Painel Admin -->
+                <a href="painel.html" class="btn small outline" style="border-color: var(--gold); color: var(--gold); background: transparent;">Painel Admin</a>
+
+                <!-- Carrinho interativo ajustado -->
+                <span onclick="abrirCarrinho()" style="cursor: pointer; user-select: none; font-size: 0.88rem; font-weight: 500;">
+                    🛒 Carrinho (<b id="cart">0</b>)
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Banner Principal com a Nova Imagem -->
+    <div class="hero" style="--img:url(img/papelaria-hero.png)">
+        <div class="container">
+            <span class="tag">CRIATIVIDADE EM CADA DETALHE</span>
+            <h1>Ideias que começam<br><em>no papel.</em></h1>
+            <p>Materiais para estudar, organizar sua rotina e transformar ideias em projetos.</p>
+            <a class="btn" href="#lista">Explorar produtos</a>
+        </div>
+    </div>
+
+    <!-- Lista de Produtos da Papelaria -->
+    <section>
+        <div class="container">
+            <div class="head">
+                <div>
+                    <h2>Mais procurados</h2>
+                    <p>Os favoritos de quem ama papelaria</p>
+                </div>
+            </div>
+            
+            <!-- Filtros de Categoria e Preço para a Papelaria -->
+            <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; background: #1a1a1a; padding: 15px; border-radius: 8px; margin-bottom: 25px; border: 1px solid rgba(212, 175, 55, 0.2);">
+    
+                <!-- Select de Categoria -->
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label for="filtroCategoria" style="color: #fff; font-size: 0.85rem;">Filtrar por Categoria:</label>
+                    <select id="filtroCategoria" onchange="atualizarLista()" style="padding: 8px 12px; border-radius: 5px; background: #222; color: #fff; border: 1px solid #444; outline: none;">
+                        <option value="todos">Todas as categorias</option>
+                        <option value="cadernos">Cadernos</option>
+                        <option value="organizacao">Organização</option>
+                        <option value="desenho">Desenho</option>
+                        <option value="marcadores">Marcadores</option>
+                        <option value="canetas">Canetas</option>
+                    </select>
+                </div>
+
+                <!-- Barra de Preço Máximo -->
+                <div style="display: flex; flex-direction: column; gap: 5px;">
+                    <label for="filtroPreco" style="color: #fff; font-size: 0.85rem;">Preço Máximo: R$ <span id="valorPreco">100,00</span></label>
+                    <input type="range" id="filtroPreco" min="10" max="150" value="150" step="5" oninput="atualizarLista()" style="cursor: pointer; accent-color: var(--gold);">
+                </div>
+
+            </div>
+
+            <div class="grid" id="lista"></div>
+        </div>
+    </section>
+
+    <!-- Notificação do Carrinho / Toast -->
+    <div class="toast" role="status"></div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2026 Ponto & Página</p>
+    </footer>
+
+    <!-- Modal Única de Zoom / Lupa da Capa -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">×</span>
+        <img class="modal-content" id="imgExpanded" alt="Capa Ampliada">
+    </div>
+
+    <!-- Modal / Gaveta Lateral do Carrinho -->
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Seu Carrinho</h2>
+                <span class="close-cart" onclick="fecharCarrinho()">×</span>
+            </div>
+            <div id="cartItems" class="cart-items">
+                <!-- Os itens adicionados aparecem aqui -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <strong id="cartTotalValue">R$ 0,00</strong>
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 15px;" onclick="finalizarCompra()">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

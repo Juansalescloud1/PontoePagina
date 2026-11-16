@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar | Ponto & Página</title>
+    
+    <!-- Importando as fontes do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Conectando o arquivo de estilos (CSS) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- ADICIONADO: data-page="login" para o script.js reconhecer a página -->
+<body class="auth" data-page="login">
+
+    <!-- Caixa centralizada na tela -->
+    <div class="box">
+        <!-- Logo clicável que leva de volta para a Home -->
+        <a class="logo" href="index.html">Ponto & Página</a>
+        
+        <h1>Entrar</h1>
+        <p class="muted">Bem-vindo de volta!</p>
+
+        <!-- Formulário de Login (ID alterado para "login" para bater com o script.js) -->
+        <form id="login">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" required placeholder="seu@email.com">
+
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" required placeholder="Sua senha">
+
+            <button type="submit" class="btn" style="margin-top: 20px;">Entrar</button>
+        </form>
+
+        <!-- Link para a tela de cadastro -->
+        <p style="text-align: center; margin-top: 20px; font-size: 0.85rem;">
+            Não tem uma conta? <a href="cadastro.html" style="color: var(--gold);">Cadastre-se</a>
+        </p>
+    </div>
+    
+    <!-- Notificação rápida (Toast) para mensagens do sistema -->
+    <div class="toast" role="status"></div>
+
+    <!-- Script principal do projeto -->
+    <script src="script.js"></script>
+
+</body>
+</html>

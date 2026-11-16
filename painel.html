@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Vendedor | Ponto & Página</title>
+    
+    <!-- Importando fontes do Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <!-- Conectando o arquivo de estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- O atributo data-page ajuda o script.js a saber em qual página estamos -->
+<body data-page="painel">
+
+    <!-- Cabeçalho simples do painel com logo e botão de sair -->
+    <header>
+        <div class="container nav">
+            <a class="logo" href="index.html">
+                <img src="img/logo.png" alt="Ponto & Página">
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <!-- Chama a função sairAdmin() lá do final da página ao clicar -->
+                    <li><a href="#" onclick="sairAdmin()" style="color: #ff7b6b;">Sair do Painel</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Área principal do painel do vendedor (usa grid no CSS para dividir as colunas) -->
+    <main class="painel">
+        
+        <!-- Formulário para cadastrar novos produtos -->
+        <div class="box">
+            <h1>Adicionar Produto</h1>
+            <p class="muted">Cadastre um novo livro ou item de papelaria para a loja.</p>
+            
+            <form id="formNovoProduto">
+                
+                <!-- Escolha entre Livro ou Papelaria -->
+                <label for="tipoProduto">Tipo de Produto</label>
+                <select id="tipoProduto" required>
+                    <option value="livros">Livro</option>
+                    <option value="papelaria">Papelaria</option>
+                </select>
+
+                <label for="titulo">Título / Nome do Produto</label>
+                <input type="text" id="titulo" required placeholder="Ex: Caderno Espiral ou Sapiens">
+
+                <label for="autor">Autor / Marca</label>
+                <input type="text" id="autor" required placeholder="Ex: Faber-Castell ou Yuval Noah Harari">
+
+                <label for="categoria">Categoria</label>
+                <select id="categoria" required>
+                    <!-- Categorias misturadas de livros e papelaria -->
+                    <option value="Geral">Geral</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Autoajuda">Autoajuda</option>
+                    <option value="Suspense">Suspense</option>
+                    <option value="Ficção">Ficção</option>
+                    <option value="Biografia">Biografia</option>
+                    <option value="Estudos">Estudos</option>
+                    <option value="Fantasia">Fantasia</option>
+                    <option value="Receitas">Receitas</option>
+                    <option value="cadernos">Cadernos</option>
+                    <option value="organizacao">Organização</option>
+                    <option value="desenho">Desenho</option>
+                    <option value="marcadores">Marcadores</option>
+                    <option value="canetas">Canetas</option>
+                </select>
+
+                <!-- Passo (step) de 0.05 permite colocar centavos no preço -->
+                <label for="preco">Preço (R$)</label>
+                <input type="number" id="preco" step="0.05" required placeholder="49.90">
+
+                <!-- Upload da imagem da capa/produto (aceita qualquer tipo de imagem) -->
+                <label for="imagemFile">Foto do Produto</label>
+                <input type="file" id="imagemFile" accept="image/*" required style="cursor: pointer;">
+
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Cadastrar Produto</button>
+            </form>
+        </div>
+
+        <!-- Área de Gestão: Onde aparecem as listas dinâmicas -->
+        <div>
+            <!-- Cabeçalho da lista de produtos -->
+            <div class="head">
+                <div>
+                    <h2>Gerenciar Meus Produtos</h2>
+                    <p>Produtos cadastrados por você no sistema</p>
+                </div>
+            </div>
+            
+            <!-- Essa div está vazia porque o script.js vai preencher ela automaticamente -->
+            <div class="meus" id="listaMeusProdutos" style="margin-bottom: 40px;">
+                <!-- Os produtos cadastrados entram aqui pelo JS -->
+            </div>
+
+            <!-- Cabeçalho da lista de pedidos -->
+            <div class="head">
+                <div>
+                    <h2>Pedidos dos Clientes</h2>
+                    <p>Acompanhe e atualize o status dos pedidos realizados na loja</p>
+                </div>
+            </div>
+            
+            <!-- Essa div também será preenchida pelo script.js com dados do servidor -->
+            <div class="meus" id="listaPedidosAdmin">
+                <!-- Os pedidos do servidor entram aqui pelo JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Notificação rápida (Toast) usada para exibir mensagens do tipo "Produto adicionado!" -->
+    <div class="toast" role="status"></div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2026 Ponto & Página</p>
+    </footer>
+
+    <!-- Script exclusivo desta página para tratar o logout do administrador -->
+    <!-- Script exclusivo desta página para tratar o logout do administrador -->
+    <script>
+        function sairAdmin() {
+            // Remove a chave da sessão atual
+            sessionStorage.removeItem('adminLogado');
+            // Manda de volta para a tela de login do admin
+            window.location.href = 'login-admin.html';
+        }
+    </script>
+
+    <!-- Importa o arquivo JS principal do projeto -->
+    <script src="script.js"></script>
+</body>
+</html>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastre-se | Ponto & Página</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<!-- data-page="cadastro" avisa o script.js para escutar este formulário -->
+<body class="auth" data-page="cadastro">
+
+    <div class="box">
+        <a class="logo" href="index.html">Ponto & Página</a>
+        
+        <h1>Criar Conta</h1>
+        <p class="muted">Junta-te a nós e acompanha os teus pedidos.</p>
+
+        <!-- O ID tem de ser "cadastro" para o script.js o encontrar -->
+        <form id="cadastro">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" required placeholder="O teu nome">
+
+            <label for="email">E-mail</label>
+            <input type="email" id="email" required placeholder="seu@email.com">
+
+            <label for="senha">Senha</label>
+            <input type="password" id="senha" required placeholder="Cria uma senha">
+
+            <button type="submit" class="btn" style="margin-top: 20px;">Cadastrar</button>
+        </form>
+
+        <p style="text-align: center; margin-top: 20px; font-size: 0.85rem;">
+            Já tem uma conta? <a href="login.html" style="color: var(--gold);">Entrar</a>
+        </p>
+    </div>
+
+    <!-- Notificação rápida (Toast) -->
+    <div class="toast" role="status"></div>
+
+    <!-- Apenas o script principal -->
+    <script src="script.js"></script>
+
+</body>
+</html>

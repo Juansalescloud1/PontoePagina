@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ponto & Página - Catálogo de Livros</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="//code.jivosite.com/widget/dVqa3bUvC3" async></script>
+</head>
+<body data-page="livros">
+
+    <!-- Header / Nav -->
+    <header>
+        <div class="container nav">
+            <a class="logo" href="index.html">
+                <img src="img/logo.png" alt="Ponto & Página">
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="livros.html" class="active">Livros</a></li>
+                    <li><a href="papelaria.html">Papelaria</a></li>
+                </ul>
+            </nav>
+
+            <div class="actions">
+                <div id="authButtons" style="display: flex; align-items: center; gap: 10px;">
+                    <a href="login.html" class="btn small" style="background: transparent; color: var(--gold); border: 1.5px solid var(--gold);">Entrar</a>
+                    <a class="btn small" href="cadastro.html">Cadastre-se</a>
+                </div>
+
+                <!-- Aparece só quando o utilizador faz login -->
+                <div id="userProfile" style="display: none; align-items: center; gap: 10px;">
+                    <img id="userAvatarHeader" src="img/avatar-default.svg" alt="Foto" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+                    <span id="userName" style="font-size: 0.85rem; font-weight: 600;"></span>
+                    <a href="pedidos.html" class="btn small outline" style="border-color: var(--gold); color: var(--gold); background: transparent;">📦 Meus Pedidos</a>
+                    <button onclick="fazerLogout()" class="btn small outline" style="border-color: #ff7b6b; color: #ff7b6b; background: transparent;">Sair</button>
+                </div>
+                
+                <!-- Busca de livros -->
+                <input class="search" oninput="atualizarLista()" placeholder="Buscar livro..." aria-label="Buscar">
+
+                <a href="painel.html" class="btn small outline" style="border-color: var(--gold); color: var(--gold); background: transparent;" title="Gerenciar Produtos">Painel Admin</a>
+
+                <span onclick="abrirCarrinho()" style="cursor: pointer; user-select: none; font-size: 0.88rem; font-weight: 500;">
+                    🛒 Carrinho (<b id="cart">0</b>)
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Filtro de Categorias -->
+    <section id="categorias" style="padding-top: 40px;">
+        <div class="container">
+            <div class="head">
+                <div>
+                    <h2>Categorias de Livros</h2>
+                    <p>Filtre pelo seu gênero preferido</p>
+                </div>
+            </div>
+            
+            <div class="cats">
+                <div class="cat active" onclick="filtrarCategoria('Todas', this)">Todas</div>
+                <div class="cat" onclick="filtrarCategoria('Ficção', this)">Ficção</div>
+                <div class="cat" onclick="filtrarCategoria('Ciência', this)">Ciência / Não Ficção</div>
+                <div class="cat" onclick="filtrarCategoria('Romance', this)">Romance</div>
+                <div class="cat" onclick="filtrarCategoria('Suspense', this)">Suspense</div>
+                <div class="cat" onclick="filtrarCategoria('Fantasia', this)">Fantasia</div>
+                <div class="cat" onclick="filtrarCategoria('Clássico', this)">Clássico</div>
+                <div class="cat" onclick="filtrarCategoria('Autoajuda', this)">Autoajuda</div>
+                <div class="cat" onclick="filtrarCategoria('Biografia', this)">Biografia</div>
+                <div class="cat" onclick="filtrarCategoria('Estudos', this)">Estudos</div>
+                <div class="cat" onclick="filtrarCategoria('Receitas', this)">Receitas</div>
+                <div class="cat" onclick="filtrarCategoria('Religioso', this)">Religioso</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lista Completa de Livros -->
+    <section id="livros">
+        <div class="container">
+            <div class="head">
+                <div>
+                    <h2>Todos os Livros</h2>
+                    <p>Explore o nosso catálogo completo</p>
+                </div>
+            </div>
+            <div class="grid" id="lista"></div>
+        </div>
+    </section>
+
+    <!-- Toast aviso -->
+    <div class="toast" role="status"></div>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>© 2026 Ponto & Página</p>
+    </footer>
+
+    <!-- Modais -->
+    <div id="imageModal" class="modal">
+        <span class="close-modal">×</span>
+        <img class="modal-content" id="imgExpanded" alt="Capa Ampliada">
+    </div>
+
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Seu Carrinho</h2>
+                <span class="close-cart" onclick="fecharCarrinho()">×</span>
+            </div>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <strong id="cartTotalValue">R$ 0,00</strong>
+                </div>
+                <button class="btn" style="width: 100%; margin-top: 15px;" onclick="finalizarCompra()">Finalizar Compra</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
