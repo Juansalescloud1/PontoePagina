@@ -70,20 +70,40 @@
     
     <!-- Script específico da página de pedidos -->
     <script>
-        // O evento "DOMContentLoaded" espera todo o HTML carregar antes de rodar o código
         document.addEventListener("DOMContentLoaded", function() {
-            
-            // Busca no navegador se existe alguém logado
-            var usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-            
-            // Trava de segurança: Se não tiver ninguém logado, expulsa para a tela de login
-            if (!usuarioLogado) {
-                window.location.href = 'login.html';
-                return; // O return para a execução do código aqui
+            // Lista das chaves mais comuns onde o script.js pode ter salvo o login
+            var possiveisChaves = [
+                'usuarioLogado', 'usuario', 'user', 'currentUser',
+                'loggedUser', 'userLogged', 'contaLogada', 'clienteLogado',
+                'auth_user', 'userData', 'sessao', 'login'
+            ];
+
+            var usuarioEncontrado = null;
+
+            // Verifica tanto no localStorage quanto no sessionStorage
+            for (var i = 0; i < possiveisChaves.length; i++) {
+                var valor = localStorage.getItem(possiveisChaves[i]) || sessionStorage.getItem(possiveisChaves[i]);
+                
+                if (valor && valor !== 'null' && valor !== 'undefined' && valor !== 'false') {
+                    try {
+                        usuarioEncontrado = JSON.parse(valor);
+                    } catch (e) {
+                        // Caso o login esteja salvo como texto simples (ex: apenas o e-mail ou nome)
+                        usuarioEncontrado = valor;
+                    }
+                    if (usuarioEncontrado) break;
+                }
             }
-            
-            // Se passou na trava acima, ele verifica se a função existe no script.js e a executa
-            if (typeof carregarMeusPedidos === 'function') {
+
+            // Só redireciona para o login se realmente não existir sessão ativa no navegador
+            if (!usuarioEncontrado) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Executa carregarMeusPedidos() caso o script.js ainda não tenha preenchido a tela
+            var lista = document.getElementById('listaPedidos');
+            if (typeof carregarMeusPedidos === 'function' && (!lista || lista.querySelector('.muted'))) {
                 carregarMeusPedidos();
             }
         });
