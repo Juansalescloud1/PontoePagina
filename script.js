@@ -1,5 +1,7 @@
 // =========================================================
-// 1. DADOS INICIAIS DE TESTE
+//  INCIANDO O BACK_END 
+//  ATENÇÃO: TESTAR AOS POUCOS PARA NÃO SE PERDER !!
+//  TESTANDO COM FUNÇÔES BÁSICAS
 // =========================================================
 
 // Função que cria os dados base quando o site abre pela primeira vez
@@ -22,22 +24,22 @@ function iniciarDadosDeTeste() {
         cep: '01000-000' 
       }
     }];
-    // Salva transformando em texto (JSON)
+    // Salvando transformando em texto JSON
     sessionStorage.setItem('db_usuarios', JSON.stringify(usuarioTeste));
   }
   
-  // Cria a lista de pedidos vazia se não existir
+  // Criando a lista de pedidos vazia se não existir
   if (!sessionStorage.getItem('db_pedidos')) {
     sessionStorage.setItem('db_pedidos', JSON.stringify([]));
   }
 }
 
-// Chama a função logo de cara
+// Chamando  a função logo de cara
 iniciarDadosDeTeste();
 
 
 // =========================================================
-// 2. LISTAS DE PRODUTOS (SIMULANDO O BANCO DE DADOS)
+// 2. LISTAS DE PRODUTOS (SIMULANDO O BANCO DE DADOS NO LOCALSTORAGE)
 // =========================================================
 
 var papelaria = [
@@ -80,7 +82,7 @@ var livros = [
   {img: 'img/melhorquenosfil.jpg', t: 'Melhor que nos filmes', a: 'Lynn Painter', c: 'Geral', p: 42.9, n: 4.8}
 ];
 
-// Puxa os livros que o administrador cadastrou e coloca no TOPO da vitrine
+// Puxa os livros que o administrador cadastrou e coloca no TOPO da "vitrine"
 var livrosVendedor = sessionStorage.getItem('livros_vendedor');
 if (livrosVendedor != null) {
   var listaSalva = JSON.parse(livrosVendedor);
@@ -100,7 +102,7 @@ if (papelariaVendedor != null) {
 
 
 // =========================================================
-// 3. VARIÁVEIS GLOBAIS E FUNÇÕES AUXILIARES
+// VARIÁVEIS E  FUNÇÕES BÁSICAS PARA CARRINHO E DESCONTOS TESTANDO
 // =========================================================
 
 var categoriaAtual = '';
@@ -114,7 +116,7 @@ var cuponsDisponiveis = {
 var descontoAtual = 0;
 var cupomAplicado = '';
 
-// Deixa o valor com cara de dinheiro (R$ 00,00)
+// Deixa o valor com cara de dinheiro R$ 00,00
 function formatarPreco(valor) { 
   return 'R$ ' + valor.toFixed(2).replace('.', ','); 
 }
@@ -126,7 +128,7 @@ function mostrarAviso(mensagem) {
     aviso.textContent = mensagem; 
     aviso.classList.add('show'); 
     
-    // Tira o aviso depois de quase 2 segundos
+    // Tira o aviso depois um tempoo
     setTimeout(function() { 
       aviso.classList.remove('show'); 
     }, 1800); 
@@ -135,7 +137,7 @@ function mostrarAviso(mensagem) {
 
 
 // =========================================================
-// 4. LÓGICA DO CARRINHO DE COMPRAS
+// LÓGICA DO CARRINHO DE COMPRAS
 // =========================================================
 
 // Salva o carrinho na sessão vinculando ao id do usuário
@@ -159,7 +161,7 @@ function salvarCarrinho() {
   }
 }
 
-// Carrega o carrinho quando o usuário entra na página
+// Carrega o carrinho asim quando o usuário entra na página
 function carregarCarrinhoDoUtilizador() {
   var usuarioLogado = JSON.parse(sessionStorage.getItem('usuarioLogado'));
   var chave = (usuarioLogado && usuarioLogado.id) ? 'itens_carrinho_' + usuarioLogado.id : 'itens_carrinho_geral';
@@ -171,7 +173,7 @@ function carregarCarrinhoDoUtilizador() {
     itensCarrinho = [];
   }
   
-  salvarCarrinho(); // Chama para atualizar o número no ícone
+  salvarCarrinho(); // Chamando para atualizar o número no ícone
 }
 
 // Descobre se estamos na página de livros ou papelaria
@@ -184,7 +186,7 @@ function listaDaPagina() {
   }
 }
 
-// Coloca o produto no carrinho pelo nome (título)
+// Coloca o produto no carrinho pelo nome 
 function adicionar(titulo) {
   var pagina = document.body.getAttribute('data-page');
   var lista = (pagina == 'home') ? livros.concat(papelaria) : listaDaPagina();
@@ -341,7 +343,7 @@ function renderizarCarrinho() {
   html += '<div style="margin-top:15px;padding-bottom:12px;border-bottom:1px solid var(--line);">';
   html += '<label style="font-size:0.85rem;color:var(--gold);">🎟️ Cupom de Desconto</label>';
   html += '<div style="display:flex;gap:8px;margin-top:5px;">';
-  html += '<input type="text" id="inputCupom" value="' + cupomAplicado + '" placeholder="Ex: PONTO10" style="flex:1;padding:8px;text-transform:uppercase;">';
+  html += '<input type="text" id="inputCupom" value="' + cupomAplicado + '" placeholder="DIGITE" style="flex:1;padding:8px;text-transform:uppercase;">';
   html += '<button type="button" onclick="aplicarCupom()" class="btn small outline">Aplicar</button>';
   html += '</div>';
   if (descontoAtual > 0) {
@@ -389,7 +391,7 @@ function renderizarCarrinho() {
   }
 }
 
-// Transforma o carrinho num Pedido e salva (já considerando o desconto)
+// Transforma o carrinho num Pedido e salva (já considerando o desconto ok)
 function finalizarCompra() {
   if (itensCarrinho.length == 0) {
     mostrarAviso('Carrinho vazio!');
@@ -456,7 +458,7 @@ function finalizarCompra() {
 
 
 // =========================================================
-// 5. PÁGINA DE MEUS PEDIDOS E SEUS COMPONENTES
+// PÁGINA DE MEUS PEDIDOS
 // =========================================================
 
 // Cria as cores das tags de status
@@ -529,7 +531,7 @@ function carregarMeusPedidos() {
 
 
 // =========================================================
-// 6. EXIBIÇÃO DA VITRINE E FILTROS
+// EXIBIÇÃO DA VITRINE E FILTROS
 // =========================================================
 
 function abrirZoom(srcImagem) { 
@@ -608,7 +610,7 @@ function atualizarLista() {
     return;
   }
   
-  // Lógica para quando está na página dedicada a Livros ou Papelaria inteira
+  // Lógica para quando está na página Livros ou Papelaria inteira
   var areaProdutos = document.getElementById('lista'); 
   if (areaProdutos == null) return;
   
@@ -629,7 +631,7 @@ function atualizarLista() {
   
   var todosCardsHTML = '';
   
-  // Loop para filtrar item por item
+  // usando Loop para filtrar item por item
   for (var k = 0; k < listaCompleta.length; k++) {
     var it = listaCompleta[k];
     var textoItem = (it.t + ' ' + (it.a || '')).toLowerCase();
@@ -672,7 +674,7 @@ function filtrarCategoria(nomeDaCategoria, botaoClicado) {
 
 
 // =========================================================
-// 7. EVENTOS CARREGADOS AO ABRIR O SITE
+//  EVENTOS AO ABRIR O SITE
 // =========================================================
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -704,7 +706,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Se tentar acessar pedidos sem login, chuta pro login
+  // Se tentar acessar pedidos sem login, entra pra pagina login
   if (paginaAtiva == 'pedidos') { 
     if (usuarioLogado == null) {
       window.location.href = 'login.html'; 
@@ -793,7 +795,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // Sistema que fecha a tela de Zoom da foto e do Carrinho clicando fora
+  // Sistema que fecha a tela de Zoom da foto e do Carrinho clicando fora da area
   var janelaZoom = document.getElementById("imageModal"); 
   var botaoFecharZoom = document.querySelector(".close-modal"); 
   var janelaCarrinho = document.getElementById("cartModal");
@@ -859,7 +861,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-  // Processo de Login
+  // Processos de Login
   var formLogin = document.getElementById('login') || document.getElementById('loginForm');
   // Ajuste para não bugar com outros forms genéricos em outras páginas
   if (formLogin == null && paginaAtiva == 'login') {
@@ -975,8 +977,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // ================================================
-//=========
-// 8. FUNÇÕES GERAIS DE ADMINISTRAÇÃO E LOGOUT
+// FUNÇÕES DE ADMINISTRAÇÃO E LOGOUT
 // =========================================================
 
 // Botão Sair no Perfil
@@ -1020,7 +1021,7 @@ function renderizarProdutosPainel() {
   bloco.innerHTML = layoutLista;
 }
 
-// Permite o Admin excluir os produtos dele mesmo
+// Permite o  responsavel Admin excluir os produtos dele mesmo
 function removerItemVendedor(tipo, index) {
   var bancoAlvo = 'livros_vendedor';
   if (tipo == 'papelaria') bancoAlvo = 'papelaria_vendedor';
@@ -1060,7 +1061,7 @@ function renderizarPedidosPainelAdmin() {
   caixaTabela.innerHTML = blocosHTML;
 }
 
-// Muda o status e reflete lá na aba de "Meus Pedidos" do cliente
+// Muda o status e aparece lá na aba de "Meus Pedidos" do cliente
 function atualizarStatusPedido(idProcurado, novoTextoStatus) {
   var todosOsPeds = JSON.parse(sessionStorage.getItem('db_pedidos'));
   if (todosOsPeds == null) todosOsPeds = [];

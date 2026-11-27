@@ -11,10 +11,10 @@
     <!-- Conectando o arquivo de estilos (CSS) -->
     <link rel="stylesheet" href="style.css">
     
-    <!-- Script do JivoChat (Chat de atendimento ao cliente) que carrega de forma assíncrona -->
+    <!-- Script do JivoChat (Chat de atendimento ao cliente) -->
     <script src="//code.jivosite.com/widget/dVqa3bUvC3" async></script>
 </head>
-<!-- O atributo data-page ajuda o script.js a saber que estamos na página de pedidos -->
+
 <body data-page="pedidos">
 
     <!-- Cabeçalho e Menu de Navegação -->
@@ -51,13 +51,12 @@
     <div class="container" style="padding: 40px 0; max-width: 900px;">
         <h1 style="margin-bottom: 25px;">📦 Meus Pedidos</h1>
 
-        <!-- Div vazia onde os pedidos do usuário vão ser injetados pelo JavaScript -->
-        <div id="listaPedidos">
+       <div id="listaPedidos">
             <p class="muted">A carregar os seus pedidos...</p>
         </div>
     </div>
 
-    <!-- Notificação rápida (Toast) para mensagens do sistema -->
+    <!-- Notificação para mensagens do sistema -->
     <div class="toast" role="status"></div>
 
     <!-- Rodapé -->
@@ -65,7 +64,7 @@
         <p>© 2026 Ponto & Página - Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Importa o arquivo JS principal do projeto (que já valida o login e carrega os pedidos) -->
+    <!-- Importa o arquivo principal do projeto (que já valida o login e carrega os pedidos) -->
     <script src="script.js"></script>
 </body>
 </html>

@@ -43,7 +43,7 @@ a {
 }
 
 
-/* ===== CABEÇALHO ROBUSTO E ELEGANTE ===== */
+/* ===== CABEÇALHO ===== */
 header {
     background: linear-gradient(180deg, #080808 0%, #030303 100%);
     border-bottom: 1px solid var(--line);
@@ -61,7 +61,7 @@ header {
     height: 75px;
 }
 
-/* Ajuste da Logo em Imagem */
+/* Ajuste da Logo */
 .logo {
     display: flex;
     align-items: center;
@@ -82,7 +82,7 @@ header {
     color: var(--gold);
 }
 
-/* Navegação centralizada e sofisticada */
+/* Navegação centralizada */
 nav ul {
     display: flex;
     align-items: center;
@@ -126,7 +126,7 @@ nav a:hover::after, nav a.active::after {
 }
 
 
-/* ===== BOTÕES PROFISSIONAIS & BOTÃO DE LOGIN MELHORADO ===== */
+/* ===== BOTÕES & BOTÃO DE LOGIN ===== */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -159,13 +159,13 @@ nav a:hover::after, nav a.active::after {
     box-shadow: 0 2px 8px rgba(232, 165, 48, 0.2);
 }
 
-/* Estilo específico destacado para o Botão de Login / Principal no Header */
+/* destacado para o Botão de Login / Principal no cabeçalho */
 .btn-login, .actions .btn {
     background: linear-gradient(135deg, #f2bd5b, var(--gold));
     box-shadow: 0 4px 16px rgba(232, 165, 48, 0.3);
 }
 
-/* Botão Estilo Outline / Vendedor */
+/* Botão Vendedor */
 .btn.outline, .btn-vendedor {
     background: rgba(232, 165, 48, 0.05);
     color: var(--gold);
@@ -189,7 +189,7 @@ nav a:hover::after, nav a.active::after {
 }
 
 
-/* ===== BUSCA ===== */
+/* ===== BUSCA O FAMOSOS SEARCH===== */
 .search {
     background: #141414;
     border: 1px solid var(--line);
@@ -209,7 +209,7 @@ nav a:hover::after, nav a.active::after {
 }
 
 
-/* ===== SEÇÃO HERO (IMPONENTE) ===== */
+/* ===== SEÇÃO HERO ===== */
 .hero {
     min-height: 480px; 
     padding: 60px 0;   
@@ -248,7 +248,7 @@ nav a:hover::after, nav a.active::after {
 }
 
 
-/* ===== VANTAGENS (PERKS) ===== */
+/* ===== PERKS AQUI ===== */
 .perks {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -601,7 +601,7 @@ input:focus, select:focus, input[type=number]:focus, textarea:focus {
 }
 
 
-/* ===== TOAST E RODAPÉ ===== */
+/* ===== TOAST (NOTIF E RODAPÉ) ===== */
 .toast {
     position: fixed;
     bottom: 20px;
@@ -633,7 +633,7 @@ footer {
 }
 
 
-/* ===== MODAL DE ZOOM / LUPA ===== */
+/* =====  ZOOM / LUPA ===== */
 .modal {
     display: none; 
     position: fixed; 
@@ -820,9 +820,4 @@ footer {
 .chat-form button {
     border-radius: 20px;
     padding: 8px 20px;
-}
-/* Força o widget do Jivosite para o lado esquerdo do ecrã */
-._jivoMobileButton, .jivo-iframe-container {
-    left: 20px !important;
-    right: auto !important;
 }

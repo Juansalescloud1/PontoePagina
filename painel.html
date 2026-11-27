@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Vendedor | Ponto & Página</title>
+    <title>Painel do Administrador | Ponto & Página</title>
     
     <!-- Importando fontes do Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@
             </form>
         </div>
 
-        <!-- Área de Gestão: Onde aparecem as listas dinâmicas -->
+        <!-- Área de Gestão: Onde aparecem as listas -->
         <div>
             <!-- Cabeçalho da lista de produtos -->
             <div class="head">
@@ -94,9 +94,9 @@
                 </div>
             </div>
             
-            <!-- Essa div está vazia porque o script.js vai preencher ela automaticamente -->
+             
             <div class="meus" id="listaMeusProdutos" style="margin-bottom: 40px;">
-                <!-- Os produtos cadastrados entram aqui pelo JS -->
+                <!-- Os produtos cadastrados entram aqui pelo Javascript -->
             </div>
 
             <!-- Cabeçalho da lista de pedidos -->
@@ -107,7 +107,7 @@
                 </div>
             </div>
             
-            <!-- Essa div também será preenchida pelo script.js com dados do servidor -->
+            
             <div class="meus" id="listaPedidosAdmin">
                 <!-- Os pedidos do servidor entram aqui pelo JS -->
             </div>
@@ -115,7 +115,7 @@
 
     </main>
 
-    <!-- Notificação rápida (Toast) usada para exibir mensagens do tipo "Produto adicionado!" -->
+    <!-- Notificação usada para exibir mensagens do tipo "Produto adicionado!" -->
     <div class="toast" role="status"></div>
 
     <!-- Rodapé -->
@@ -123,8 +123,7 @@
         <p>© 2026 Ponto & Página</p>
     </footer>
 
-    <!-- Script exclusivo desta página para tratar o logout do administrador -->
-    <!-- Script exclusivo desta página para tratar o logout do administrador -->
+    <!-- Script exclusivo usando function regra bem simples desta página para tratar o logout do administrador -->
     <script>
         function sairAdmin() {
             // Remove a chave da sessão atual
@@ -134,7 +133,7 @@
         }
     </script>
 
-    <!-- Importa o arquivo JS principal do projeto -->
+    
     <script src="script.js"></script>
 </body>
 </html>

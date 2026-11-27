@@ -6,13 +6,13 @@
     <title>Ponto & Página - Início</title>
     <!-- Fontes do Google -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
-    <!-- Meu CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
   <script src="//code.jivosite.com/widget/dVqa3bUvC3" async></script>
 </head>
 <body data-page="home">
 
-    <!-- Topo do site com o menu -->
+    <!-- Cabeçalho do site com o menu -->
     <header>
         <div class="container nav">
             <!-- Logo -->
@@ -36,11 +36,10 @@
                     <a class="btn small" href="cadastro.html">Cadastre-se</a>
                 </div>
 
-                <!-- Aparece só quando o utilizador faz login -->
-                <!-- Aparece só quando o utilizador faz login -->
+                <!-- Aparece só quando o usuário faz login -->
                     <div id="userProfile" style="display: none; align-items: center; gap: 10px;">
                         
-                        <!-- Link clicável que envolve a foto e o nome levando para o perfil.html -->
+                        <!-- Link clicável que manipula a foto e o nome levando para o perfil.html -->
                         <a href="perfil.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: inherit;" title="Ir para o Meu Perfil">
                             <img id="userAvatarHeader" src="img/avatar-default.svg" alt="Foto" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover; border: 2px solid var(--gold); cursor: pointer;">
                             <span id="userName" style="font-size: 0.85rem; font-weight: 600; cursor: pointer;"></span>
@@ -49,7 +48,7 @@
                         <a href="pedidos.html" class="btn small outline" style="border-color: var(--gold); color: var(--gold); background: transparent;">📦 Meus Pedidos</a>
                         <button onclick="fazerLogout()" class="btn small outline" style="border-color: #ff7b6b; color: #ff7b6b; background: transparent;">Sair</button>
                     </div>
-                <!-- Botão de acesso rápido ao Painel do Administrador -->
+                <!-- Botão de acesso ao Painel do Administrador -->
                 <a href="painel.html" class="btn small outline" style="border-color: var(--gold); color: var(--gold); background: transparent;" title="Gerenciar Produtos">Painel Admin</a>
 
                 <!-- Ícone do carrinho -->
@@ -92,7 +91,7 @@
         </div>
     </div>
 
-    <!-- Destaque: Livros Mais Vendidos (Top 5) -->
+    <!-- Livros Mais Vendidos (Top 5) -->
     <section id="livros-destaque">
         <div class="container">
             <div class="head">
@@ -102,7 +101,7 @@
                 </div>
                 <a href="livros.html" class="btn outline small">Ver todos os livros →</a>
             </div>
-            <!-- O JS injeta o Top 5 de livros aqui -->
+            <!-- O JS Script injeta o Top 5 de livros aqui -->
             <div class="grid" id="listaMaisVendidos"></div>
         </div>
     </section>
@@ -122,7 +121,7 @@
         </div>
     </section>
 
-    <!-- Sobre a Loja / Informações -->
+    <!-- Sobre a Ponte&Pagina -->
     <section id="sobre" style="padding: 60px 0;">
         <div class="container">
             <div style="max-width: 800px; margin: 0 auto; text-align: center;">
@@ -135,10 +134,10 @@
         </div>
     </section>
 
-    <!-- Aviso flutuante (Toast) -->
+    <!-- Aviso flutuante  -->
     <div class="toast" role="status"></div>
 
-    <!-- Rodapé -->
+    <!-- O nosso Rodapé -->
     <footer>
         <p>© 2026 Ponto & Página - Todos os direitos reservados.</p>
     </footer>
@@ -157,7 +156,7 @@
                 <span class="close-cart" onclick="fecharCarrinho()">×</span>
             </div>
             <div id="cartItems" class="cart-items">
-                <!-- Itens do carrinho entram aqui via JS -->
+                <!-- Itens do carrinho entram aqui -->
             </div>
             <div class="cart-footer">
                 <div class="cart-total">
@@ -192,7 +191,7 @@
             }
         });
 
-        // Função para sair da conta, caso não esteja definida no seu script.js
+        // Função para sair da conta
         function fazerLogout() {
             localStorage.removeItem('usuarioLogado');
             window.location.reload();
